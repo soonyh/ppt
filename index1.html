@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>火麒麟门户脚手架 - 脉络分析 & 模块详解</title>
+
+    <link rel="stylesheet" href="./css/reveal.css" />
+    <!-- 模板主题 -->
+    <link rel="stylesheet" href="./css/theme/wx.css" />
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="plugin/iconfont/iconfont.css" />
+    <link rel="stylesheet" href="./lib/css/zenburn.css" />
+    <script src="./plugin/iconfont/iconfont.js"></script>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? "css/print/pdf.css"
+        : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <p>
+            <img
+              src="pic/avatar.jpg"
+              height="200"
+              width="200"
+              alt=""
+              style="border-radius: 50%; border: 4px solid #ddd;"
+            />
+          </p>
+          <h1>火麒麟门户脚手架</h1>
+          <h2><em>脉络分析 & 模块详解</em></h2>
+          <div>
+            <small style="font-style: italic;"
+              >BSS产品线研发二部 <span style="margin: 0 5px;">/</span> soon<span
+                style="margin: 0 5px;"
+                >/</span
+              >
+              2020-04-27</small
+            >
+          </div>
+        </section>
+        <section class="text-left">
+          <p class="text-center margin-bottom-lg">
+            <!-- <span class="icon white nobordered lg"
+              ><i class="iconfont icon-design"></i
+            ></span> -->
+            <svg aria-hidden="true">
+              <use xlink:href="#icon-color-design6"></use>
+            </svg>
+          </p>
+          <ul>
+            <li>
+              框架都是基于<span class="text-primary">预设场景</span
+              >设计的，火麒麟脚手架也不例外。
+            </li>
+            <li>
+              首先他是基于
+              <span class="text-primary">react</span>
+              生态圈构建的，其次<span class="text-primary">耦合</span
+              >了uportal的后端服务。
+            </li>
+            <li>
+              <span class="text-primary">自带</span
+              >『工作台配置』『菜单管理』等13个功能模块。
+            </li>
+
+            <li><span class="text-primary">前后端分离</span>的。</li>
+          </ul>
+        </section>
+        <section>
+          <section>
+            <p class="margin-bottom-lg">
+              <svg aria-hidden="true">
+                <use xlink:href="#icon-color-happy1"></use>
+              </svg>
+            </p>
+            <p>如果预设的场景</p>
+            <p>刚好覆盖你的需求，你又刚好没有代码上的历史包袱</p>
+            <p>
+              那么一键<a
+                href="http://gitlab.iwhalecloud.com/soon/react-slick/tree/develop"
+                target="_blank"
+                >clone</a
+              >你就继承了现有的13个模块以及各类前端资产
+            </p>
+            <p><em>Happy! </em></p>
+          </section>
+          <section>
+            <p>
+              <img src="./pic/asset1.jpg" alt="" />
+            </p>
+            <p class="text-primary">
+              13个功能模块
+            </p>
+          </section>
+          <section data-background-color="#fff" style="padding: 0;" >
+            <p>
+              <canvas id="word_cloud" width="700" height="500"></canvas>
+            </p>
+            <p class="fs16">
+              前端资产<a
+                href="https://www.processon.com/view/link/5e399b40e4b021dc289976c0?pw=Uow7#map"
+                target="_blank"
+                >【详见2月分享】</a
+              >
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <p class="margin-bottom-lg">
+              <!-- <span class="icon white nobordered lg"
+              ><i class="iconfont icon-boom"></i
+            ></span> -->
+              <svg aria-hidden="true">
+                <use xlink:href="#icon-color-boom"></use>
+              </svg>
+            </p>
+            <p>如果预设场景满足不了你的需求</p>
+            <p>改造过程可能就会</p>
+            <p><span class="text-primary">出现意外 </span></p>
+          </section>
+          <section class="text-left">
+            <h2 class="text-primary margin-bottom-lg">比如这些场景</h2>
+            <div class="media-box">
+              <div class="media-right">
+                <img
+                  src="./pic/bug.webp"
+                  width="500"
+                  alt=""
+                  class="bordered0"
+                />
+              </div>
+              <div class="media-body">
+                <ul>
+                  <li>Layout改造</li>
+                  <li>登录/菜单相关的接口服务改造</li>
+                  <li>登录界面UI改造</li>
+                  <li>others...</li>
+                </ul>
+                <div class="media-body-text-hack"></div>
+              </div>
+            </div>
+          </section>
+        </section>
+        <section>
+          <section>
+            <p class="margin-bottom-lg">
+              <svg aria-hidden="true">
+                <use xlink:href="#icon-color-mind"></use>
+              </svg>
+            </p>
+            <h2><span class="text-primary">脉络分析</span></h2>
+            <p class="fs20">
+              主要指全局设计的脉络，比如：layout控制、访问权限校验等。不包括pages下的业务模块。
+            </p>
+            <p class="fs20">
+              因为移除不需要的业务模块，并不会影响整体的运行。
+            </p>
+          </section>
+          <section>
+            <ul class="col2 clearfix">
+              <li>
+                <div class="media-box">
+                  <div class="media-left" style="margin-right: 8px;">
+                    <span class="icon orange"
+                      ><i class="iconfont icon-data"></i
+                    ></span>
+                  </div>
+                  <div class="media-body">
+                    <div class="title">3个model</div>
+                    <div class="desc">
+                      login / menu / settings
+                    </div>
+                    <div class="media-body-text-hack"></div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="media-box">
+                  <div class="media-left" style="margin-right: 8px;">
+                    <span class="icon"
+                      ><i class="iconfont icon-router"></i
+                    ></span>
+                  </div>
+                  <div class="media-body">
+                    <div class="title">4个layout</div>
+                    <div class="desc">
+                      UserLayout / BasicLayout / Exception / Locked
+                    </div>
+                    <div class="media-body-text-hack"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2><span class="text-primary">火麒麟门户</span></h2>
+          </section>
+          <section
+            data-background-iframe="http://172.16.81.126:9999/portal-react/"
+            data-background-interactive
+          ></section>
+          <section>
+            <ol>
+              <li>
+                <p>
+                  访问门户时，从输入链接回车到显示页面，期间执行了哪些逻辑？
+                </p>
+              </li>
+              <li><p>访问权限（页面级）的校验机制是什么？</p></li>
+              <li><p>viewMode=inner如何实现的？</p></li>
+            </ol>
+          </section>
+          <section>
+            <h2><span>3个model</span></h2>
+          </section>
+          <section data-background-color="#2b2f3a">
+            <img
+              src="./pic/model_login.jpg"
+              alt=""
+              style="border: none; box-shadow: none;"
+            />
+          </section>
+          <section data-background-color="#2b2f3a">
+            <img
+              src="./pic/model_menu.jpg"
+              alt=""
+              style="border: none; box-shadow: none;"
+            />
+          </section>
+          <section data-background-color="#2b2f3a">
+            <img
+              src="./pic/model_settings.jpg"
+              alt=""
+              style="border: none; box-shadow: none;"
+            />
+          </section>
+          <section>
+            <h2>4个layout</h2>
+            <p class="text-gray">
+              http://172.16.81.126:9999/portal-react/#/notice
+            </p>
+            <p class="text-gray">
+              以访问公告页为例
+            </p>
+          </section>
+          <section class="text-left fs20" style="padding: 0;">
+            <p class="text-center">依次命中下列3个文件</p>
+            <ol>
+              <li class="fragment">
+                <p>global.js</p>
+                <p class="margin-left text-gray fs20">
+                  挂载补丁，如：国际化、ie标识（用于css兼容）等
+                </p>
+              </li>
+              <li class="fragment">
+                <p>app.js</p>
+                <p class="margin-left text-gray fs20">
+                  用于运行时的配置（暂时没用）
+                </p>
+              </li>
+              <li class="fragment">
+                <p>layouts/index.js</p>
+                <p class="margin-left text-gray fs20">
+                  查询登录状态，总共5个<a href="#/4/6">状态</a>，涉及到logged.do和status.do两个接口。
+                </p>
+                <ul class="fs20 fragment">
+                  <li >                    
+                    <p>'CONFIRMING'</p>
+                    <p class="margin-left text-gray fs20">
+                      初始值，表示查询中，此时界面显示loading
+                    </p>
+                  </li>
+                  <li class="fragment ">
+                    <p>'LOG_OUT'</p>
+                    <p class="margin-left text-gray fs20">
+                      更新<a href="#/4/6">login</a
+                      >中的status为'LOG_OUT'；路由到<span class="text-primary"
+                        >UserLayout</span
+                      >;
+                    </p>
+                  </li>
+                  <li class="fragment ">
+                    <p>'SESSION_TIME_OUT'</p>
+                    <p class="margin-left text-gray fs20">
+                      通知后台登出；重置<a href="#/4/6">login</a
+                      >中的status和user；路由到<span class="text-primary"
+                        >UserLayout</span
+                      >;
+                    </p>
+                  </li>
+                  <li class="fragment ">
+                    <p>'LOCKED'</p>
+                    <p class="margin-left text-gray fs20">
+                      更新<a href="#/4/6">login</a
+                      >中的status和user；更新sessionStorage中的status；路由到<span
+                        class="text-primary"
+                        >Locked</span
+                      >;
+                    </p>
+                  </li>
+                  <li class="fragment ">
+                    <p>'LOGINED'</p>
+                    <p class="margin-left text-gray fs20">
+                      更新<a href="#/4/6">login</a
+                      >；更新sessionStorage中的user和status；路由到<span
+                        class="text-primary"
+                        >BasicLayout</span
+                      >；
+                    </p>
+                  </li>
+                </ul>
+              </li>
+            </ol>
+          </section>
+          <section class="text-left fs20">
+            <p class="text-center">
+              变成'LOGINED'之后，'layouts/index.js'还执行了哪些逻辑？
+            </p>
+            <ol>
+              <li class="fragment ">
+                <p>请求后台获取menu数据</p>
+                <p class="margin-left text-gray fs20">
+                  期间，界面显示loading
+                </p>
+                <p class="margin-left text-gray fs20">
+                  成功，更新model中的<a href="#/4/7">menu</a>，同时路由到<span
+                    class="text-primary"
+                    >BasicLayout</span
+                  >
+                </p>
+                <p class="margin-left text-gray fs20">
+                  失败，路由到<span class="text-primary">Exception</span>
+                </p>
+              </li>
+              <li class="fragment ">
+                <p>访问权限判断</p>
+                <p class="margin-left text-gray fs20">
+                  取当前的pathname在<a href="#/4/7">menu</a
+                  >中遍历。存在路由到<span class="text-primary"
+                    >BasicLayout</span
+                  >，否则路由到<span class="text-primary">Exception</span>
+                </p>
+                <p class="margin-left text-gray fs20">
+                  遍历时需要区分是iframe页面还是门户自带页面，详见_findMenu()方法
+                </p>
+              </li>
+              <li class="fragment ">
+                <p>其他...</p>
+                <p class="margin-left text-gray fs20">
+                  『记录』 在sessionStorage中记录用户最后操作的时间。
+                </p>                
+                <p class="margin-left text-gray fs20">
+                  『轮询』根据记录的最后超时时间，每隔60秒轮询登录状态。
+                </p>
+                <p class="margin-left text-gray fs20">
+                  『水印』给内页添加水印,支持配置setting开关
+                </p>
+              </li>
+            </ol>
+          </section>
+          <section class="text-left fs20">
+            <p class="text-center">变成'LOG_OUT'之后，进入登录页面</p>
+            <ol>              
+              <li class="fragment ">
+                <p>三个字段</p>
+                <p class="margin-left text-gray"><a href="#/4/6">login</a>中的另外3个字段：'needVerifyCode',
+                  'needModifyPsw', 'forceLogin'</p>
+              </li>
+              <li class="fragment">
+                <p>手动/单点登录</p>
+                <p class="margin-left text-gray">在model层面都是一样的，<a href="#/4/10"></a></p>
+              </li>
+            </ol>
+            <p>
+              登录成功之后，更新<a href="#/4/10">login</a
+              >；更新sessionStorage中的user和status；路由到<span
+                class="text-primary"
+                >BasicLayout</span
+              >；与chekkLogin查询为登录状态时处理逻辑一致
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <h2><em>分享完毕</em></h2>
+          <p>: )</p>
+        </section>
+      </div>
+    </div>
+
+    <script src="./lib/js/head.min.js"></script>
+    <script src="./js/reveal.js"></script>
+    <script src="./plugin/wordcloud2.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        width: 1002,
+        height: 800,
+        // margin: 0,
+        minScale: 1,
+        maxScale: 1,
+        history: true,
+        slideNumber: true,
+        controls: true,
+        transition: "convex",
+        // mouseWheel: true,
+        // autoSlide: 1000 ,
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          {
+            src: "./plugin/markdown/marked.js",
+          },
+          {
+            src: "./plugin/markdown/markdown.js",
+          },
+          {
+            src: "./plugin/notes/notes.js",
+            async: true,
+          },
+          {
+            src: "./plugin/zoom-js/zoom.js",
+            async: true,
+          },
+          {
+            src: "./plugin/highlight/highlight.js",
+            async: true,
+            callback: function () {
+              hljs.initHighlightingOnLoad();
+            },
+          },
+        ],
+      });
+
+      var db = [
+        { word: "react", freq: 70 },
+        { word: "Antd", freq: 38 },
+        { word: "umi", freq: 38 },
+        { word: "dva", freq: 28 },
+        { word: "node", freq: 38 },
+        { word: "Less", freq: 26 },
+        { word: "CSS Module", freq: 22 },
+        { word: "ES6", freq: 20 },
+        { word: "bizcharts", freq: 20 },
+        { word: "request", freq: 20 },
+        { word: "SlickTable", freq: 18 },
+        { word: "ComboGrid", freq: 18 },
+        { word: "SlickUpload", freq: 18 },
+        { word: "Iconfont", freq: 17 },
+        { word: "ScrollBar", freq: 16 },
+        { word: "lodash", freq: 15 },
+        { word: "@umijs/hooks", freq: 15 },
+        { word: "numeral", freq: 15 },
+        { word: "moment", freq: 15 },
+        { word: "memoize-one", freq: 14 },
+        { word: "prop-types", freq: 14 },
+        { word: "Mock", freq: 14 },
+        { word: "接口代理", freq: 18 },
+        { word: "布局规范", freq: 18 },
+        { word: "通栏", freq: 14 },
+        { word: "双栏", freq: 13 },
+        { word: "国际化", freq: 13 },
+        { word: "数据流", freq: 13 },
+        { word: "集成设计", freq: 12 },
+        { word: "双栏自适应", freq: 24 },
+        { word: "垂直居中", freq: 12 },
+        { word: "Form", freq: 14 },
+        { word: "Table", freq: 12 },
+        { word: "Upload", freq: 15 },
+        { word: "8", freq: 18 },
+        { word: "Card", freq: 17 },
+        { word: "工具类", freq: 26 },
+        { word: "离线包", freq: 26 },
+        { word: "Yarn", freq: 18 },
+        { word: "UI规范", freq: 18 },
+        { word: "24", freq: 18 },
+        { word: "63", freq: 18 },
+        { word: "自定义组件", freq: 18 },
+        { word: "css", freq: 18 },
+        { word: "utils", freq: 18 },
+        { word: "classnames", freq: 18 },
+        { word: "$.ajax", freq: 14 },
+      ];
+
+      list = [];
+      for (var i in db) {
+        list.push([db[i]["word"], db[i]["freq"]]);
+      }
+
+      WordCloud.minFontSize = "15px";
+      WordCloud(document.getElementById("word_cloud"), {
+        list: list,
+        gridSize: 22,
+        fontFamily: "Source Sans Pro",
+        backgroundColor: "#fff",
+      });
+    </script>
+  </body>
+</html>
