@@ -1,0 +1,1 @@
+webpackJsonp([246],{2050:function(e,t){e.exports={content:["article",["p",["code","zeal-cube"]," strictly follows ",["a",{title:null,href:"http://semver.org/"},"Semantic Versioning 2.0.0"],"."]],meta:{order:6,title:"Change Log",toc:!1,timeline:!0,filename:"CHANGELOG.en-US.md"},toc:["ul"]}}});

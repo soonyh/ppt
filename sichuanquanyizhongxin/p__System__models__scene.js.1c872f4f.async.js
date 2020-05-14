@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[31],{"Ww+B":function(e,a,r){"use strict";r.r(a);var n=r("MVZn"),s=r.n(n);a["default"]={namespace:"scene",state:{index:0,paramsArr:[]},effects:{},reducers:{saveScene:function(e,a){var r=e.paramsArr,n=a.payload,p=n.index,c=n.params;return r[p]=c,s()({},e,{index:p,paramsArr:r})}}}}}]);

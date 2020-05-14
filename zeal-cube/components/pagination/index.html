@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An enterprise-class UI design language and React-based implementation with a set of high-quality React components, one of best React UI library for enterprises">
+    <title>Zeal Cube</title>
+    <link rel="icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALdqDgC4aQwIsG8cJ0G97yY3xP8IOMP/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAt2oOALdqDwG3ag4st2oOnbRsFKQ8wPiiOMP/nTjD/yw5wv4BOcP/AAAAAAAAAAAAAAAAAAAAAAC3ag4At2oOALdqDhm3ag56t2oO4LdqDv+2bRS3PcH5szjD//84w//hOMP/ejjD/xk3w/8AOcL+AAAAAAC3ag4At2oOCrdqDlq3ag7Lt2oO/bdqDv+zZwv/s31A6l687Og1vvz/OMP//zjD//04w//LOMP/WjjD/ws4w/8At2oOALdqDly3ag73t2oO/7VpDv+rYw3/nlsJ/6p+S/9nsuH/L6jp/zW29P44wf3/OMP//zjD//c4w/9cOMP/ALdqDgC3ag5tt2oO/7NoDv+iXg3/mloM/5lYCP+qfUr+Z7Lh/i2j5f8wpOX/Mqzs/ze//P84w///OMP/bTjD/wC3ag4At2oObbdqDv+wZg3/m1oM/5paDP+ZWAj/qnxJ/mey4P4to+X/MKTl/zCl5v82u/n/OMP//zjD/204w/8At2oOALdqDm23ag7/sGYN/5tbDP+aWQv/mVgI/7CGVv50ueL+LqTl/y+k5f8wpeb/Nrz5/zjD//84w/9tOMP/ALdqDgC3ag5tt2oO/7BmDf+bWQn/oWcf/7CHa/6qfLz+m4La/nmv5P5CrOb/LqXm/za7+f84w///OMP/bTjD/wC3ag4At2oObbdqDf+zbBP5roJX/a2Drv6NR8//cxXK/3MTx/+LQs//l4/c/muy5f08wPn4OMP//zjD/204w/8At2oNALdqDWa2aA69ql15mpdR0fV3HMz/bw7H/3ERx/9xEcf/cA7G/3cayf+UUNb2boXtmTjB/7w4xP9mOMT/AKJGZQCsVzwejB7FiIUS4OiDEdz/fRLU/3QRy/9xEcf/cRHH/3QSy/99EtT/hBHb/4cR3el9KOGJSpz3Hll58ACADO8Aewf7AoUT3z6GFN2whhTd94YU3f+DFNr/exLR/3sS0f+DFNr/hhTd/4YU3feGFN2xhxPdPpYA1gKQB9kAAAAAAIYX3QCGFN0AhhTdC4YU3VmGFN3KhhTd/YYU3f+GFN3/hhTd/YYU3cqGFN1ZhhTdC4YU3QCGGN0AAAAAAAAAAAAAAAAAAAAAAIYU3QCGFN0AhhTdGIYU3XiGFN3ehhTd3oYU3XiGFN0YhhTdAIYU3QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIYU3QCGFd0BhhTdLoYU3S6GFd0BhhTdAAAAAAAAAAAAAAAAAAAAAAAAAAAA/D8AAPAPAADgBwAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAOAHAAD4HwAA/D8AAA==" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/zeal-cube/index-1.css"/>
+    <link rel="stylesheet" type="text/css" href="/zeal-cube/index-2.css"/>
+    <link rel="stylesheet" type="text/css" href="/zeal-cube/index-3.css"/>
+    <style id="nprogress-style">
+      #nprogress { display: none }
+    </style>
+    <link rel="stylesheet/less" type="text/css" href="/zeal-cube/color.less"/>
+    <script src="https://gw.alipayobjects.com/os/lib/??es6-shim/0.35.3/es6-sham.min.js,es6-shim/0.35.3/es6-shim.min.js"></script>
+    <!--[if lte IE 10]>
+    <script src="https://as.alipayobjects.com/g/component/??console-polyfill/0.2.2/index.js,media-match/2.0.2/media.match.min.js"></script>
+    <![endif]-->
+    <script>
+    if (!window.Intl) {
+      document.writeln('<script src="https://as.alipayobjects.com/g/component/intl/1.0.1/??Intl.js,locale-data/jsonp/en.js,locale-data/jsonp/zh.js">' + '<' + '/script>');
+    }
+    </script>
+    <script>
+    (function() {
+      function isLocalStorageNameSupported() {
+        var testKey = 'test';
+        var storage = window.localStorage;
+        try {
+          storage.setItem(testKey, '1');
+          storage.removeItem(testKey);
+          return true;
+        } catch (error) {
+          return false;
+        }
+      }
+      // 优先级提高到所有静态资源的前面，语言不对，加载其他静态资源没意义
+      var pathname = location.pathname;
+
+      function isZhCN(pathname) {
+        return /-cn\/?$/.test(pathname);
+      }
+      function getLocalizedPathname(path, zhCN) {
+        var pathname = path.startsWith('/') ? path : '/' + path;
+        if (!zhCN) { // to enUS
+          return /\/?index-cn/.test(pathname) ? '/' : pathname.replace('-cn', '');
+        } else if (pathname === '/') {
+          return '/index-cn';
+        } else if (pathname.endsWith('/')) {
+          return pathname.replace(/\/$/, '-cn/');
+        }
+        return pathname + '-cn';
+      }
+
+      // 兼容旧的 URL， `?locale=...`
+      var queryString = location.search;
+      if (queryString) {
+        var isZhCNConfig = queryString.indexOf('zh-CN') > -1;
+        if (isZhCNConfig && !isZhCN(pathname)) {
+          location.pathname = getLocalizedPathname(pathname, isZhCNConfig)
+        }
+      }
+
+      // 首页无视链接里面的语言设置 https://github.com/ant-design/ant-design/issues/4552
+      if (isLocalStorageNameSupported() && (pathname === '/' || pathname === '/index-cn')) {
+        var lang = (window.localStorage && localStorage.getItem('locale')) || ((navigator.language || navigator.browserLanguage).toLowerCase() === 'zh-cn' ? 'zh-CN' : 'en-US');
+        // safari is 'zh-cn', while other browser is 'zh-CN';
+        if ((lang === 'zh-CN') !== isZhCN(pathname)) {
+          location.pathname = getLocalizedPathname(pathname, lang === 'zh-CN');
+        }
+      }
+      document.documentElement.className += isZhCN(pathname) ? 'zh-cn' : 'en-us';
+    })()
+    </script>
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6e1cd5de3acfa4c86bc47173f187a17c";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+   </script>
+  </head>
+  <body>
+    <div id="react-content">
+      
+    </div>
+    <script src="/zeal-cube/common.js"></script>
+    <script src="/zeal-cube/index.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72788897-1"></script>
+    <script>
+    if (!location.port) {
+      // Enable Google Analytics
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-72788897-1');
+    }
+    </script> -->
+    <!-- Hotjar Tracking Code for ant.design -->
+    <!-- <script>
+    (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:473408,hjsv:5};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+    })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+    </script> -->
+  </body>
+</html>
