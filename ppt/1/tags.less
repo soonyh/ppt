@@ -1,0 +1,47 @@
+@default               :#999;
+@red                 : #f5222d;
+@orange               : #fa8c16;
+@blue                 : #1890ff;
+@green                : #a0d911;
+@purple               : #722ed1;
+
+.creater(@color; @radius: 0px) {
+  color: @color;
+  background-color: fade(@color,20%);
+  border-color: fade(@color,30%);
+  border-radius:@radius;
+}
+
+.tag {
+  display: inline-block;
+  text-align: center;
+  color: #666;
+  vertical-align: middle;
+  line-height: 20px;
+  padding: 9px 21px;
+  cursor: pointer;
+  border: 1px solid @default;
+  margin:0 3px;
+  .creater(@default);
+  
+  &.red {
+    .creater(@red);
+  }
+  &.orange {
+    .creater(@orange);
+  }
+  &.blue {
+    .creater(@blue);
+  }
+  &.green {
+    .creater(@green);
+  }
+  &.purple {
+    .creater(@purple);
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+  }
+}

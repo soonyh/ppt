@@ -1,0 +1,697 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>React@16.5.2 入门➩实战『分享』</title>
+
+  <link rel="stylesheet" href="./css/reveal.css">
+  <link rel="stylesheet" href="./css/theme/wx.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="./lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <style>
+    .reveal h2 {
+      color: #36e139;
+    }
+    .reveal .slides p,
+    .reveal .slides h3 {
+      text-align: left;
+    }
+    .reveal .slides p > em {
+      font-style: italic;
+      color: #fff;
+    }
+    /*     .reveal .slides p > strong {      
+      color: #268bd2;
+    }*/
+    
+    .reveal .slides p > img {
+      margin: 0 5px;
+    }
+    .text-center {
+      text-align: center!important;
+    }
+    .row {
+      width: 100%;
+      display: block;
+      zoom: 1
+    }
+    .row:after {
+      content: '.';
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden
+    }
+    .col-6 {
+      box-sizing: border-box;
+      width: 50%;
+      float: left;
+      padding: 0 10px!important;
+    }
+    .col-12 {
+      box-sizing: border-box;
+      width: 100%;
+      float: left;
+      padding: 0 10px!important;
+    }
+    .reveal pre {
+      width: 100%;
+    }
+    .reveal pre code {
+      max-height: none;
+    }
+  </style>
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <p class="text-center"><img src="./pic/avatar.jpg" height="200" width="200" alt="" style="border-radius:50%; border:4px solid #ddd;">
+        </p>
+        <h1 style="text-transform:none">React@16.5.2</h1>
+        <h2 style="font-size:1.2em;">入门➩实战『分享』</h2>
+        <small>Created by soon @ 2019-01-07</small>
+      </section>
+      <!--前置知识 BEGIN-->
+      <section>
+        <h2>一、前置知识</h2>
+        <p class="text-center"><img src="./pic/less.jpg" height="200" width="200" alt="less"><img src="./pic/es6.jpg" height="200" width="200" alt="es6"><img src="./pic/react.jpg" height="200" width="200" alt="react"><img src="./pic/antd.jpg" height="200" width="200" alt="antd"><img src="./pic/umi.jpg" height="200" width="200" alt="umi">
+        </p>
+      </section>
+      <!--前置知识  END-->
+
+      <!--LESS BEGIN-->
+      <section>
+        <section>
+          <h2>LESS</h2>
+          <p>
+            Less是一种CSS的预编译语言，编译后才能使用。引入它是为了增强原生CSS
+          </p>
+          <p style="text-indent:1em">CSS的短板</p>
+          <ul>
+            <li>没有变量和合理的样式复用机制 --- 导致逻辑上相关的属性值必须以字面量的形式重复输出，难以维护。</li>
+            <li>没有嵌套语法 --- 导致模块化开发中需要写很多重复的选择器</li>
+          </ul>
+          <br>
+          <br>
+          <p>Less语法：<em>变量，嵌套，混合，函数和运算</em> 等。</p>
+          <p><small><a href="https://codepen.io/soonyh/pen/PXKJXv?editors=0100" target="_blank">Demo</a> | <a href="https://less.bootcss.com/" target="_blank">快速入门</a> | <a href="https://zhuanlan.zhihu.com/p/31898262" target="_blank">进阶用法</a> | <a href="https://lesstester.com/" target="_blank">在线编译</a> | <a href="https://zhuanlan.zhihu.com/p/23382462" target="_blank">Sass&stylus</a></small>
+          </p>
+        </section>
+        <section>
+          <h3><em>Less - 变量</em>
+          </h3>
+          <div class="row">
+            <div class="col-6">
+              <pre><code class="hljs" data-trim contenteditabl>
+/* less */
+@width: 10px;
+@height: 20px;
+
+#header {
+  width: @width;
+  height: @height;
+}
+          </code></pre>
+            </div>
+            <div class="col-6">
+              <pre><code class="hljs" data-trim contenteditabl>
+/* css */          
+#header {
+  width: 10px;
+  height: 20px;
+}
+          </code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3><em>Less - 嵌套</em>
+          </h3>
+          <div class="row">
+            <div class="col-6">
+              <pre><code class="hljs" data-trim contenteditabl>
+/* less */
+.card{
+  color:#333;
+  .card-header{
+    height:36px;
+  }
+  .card-body{
+    padding:0 10px;
+  }
+  .card-footer{
+    background-color:#ddd;
+  }
+  
+  &.primary{
+    border:1px solid #999;
+  }  
+}
+          </code></pre>
+            </div>
+            <div class="col-6">
+              <pre><code class="hljs" data-trim contenteditabl>
+/* css */          
+.card {
+  color: #333;
+}
+.card .card-header {
+  height: 36px;
+}
+.card .card-body {
+  padding: 0 10px;
+}
+.card .card-footer {
+  background-color: #ddd;
+}
+.card.primary {
+  border: 1px solid #999;
+}
+          </code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3><em>Less - 混合</em>
+          </h3>
+          <div class="row">
+            <div class="col-6">
+              <pre><code class="hljs" data-trim contenteditabl>
+/* less */
+.border(@a:10px,@b:50px,@c:30px,@color:#000){
+    border:solid 1px @color;
+    box-shadow: @arguments;//指代的是 全部参数
+}
+#main{
+    .border(0px,5px,30px,red);//必须带着单位
+}
+          </code></pre>
+            </div>
+            <div class="col-6">
+              <pre><code class="hljs" data-trim contenteditabl>
+/* css */          
+#main {
+  border: solid 1px red;
+  box-shadow: 0px 5px 30px red;
+}
+          </code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3><em>Less - 函数</em>
+          </h3>
+          <div class="row">
+            <div class="col-6">
+              <pre><code class="hljs" data-trim contenteditabl>
+/* less */
+@primary: #fba64e;
+@light: lighten(#fba64e, 30%); //增加颜色亮度。
+@dark: darken(#fba64e, 30%); //降低颜色亮度。
+@fade: fade(#fba64e, 30%); //设定颜色透明度。
+
+.primary {
+    color: @primary;
+}
+.light {
+    color: @light;
+}
+.dark {
+    color: @dark;
+}
+.fade {
+    color: @fade;
+}
+          </code></pre>
+            </div>
+            <div class="col-6">
+              <pre><code class="hljs" data-trim contenteditabl>
+/* css */
+.primary {
+  color: #fba64e;
+}
+.light {
+  color: #fef1e4;
+}
+.dark {
+  color: #ac5904;
+}
+.fade {
+  color: rgba(251, 166, 78, 0.3);
+}
+
+          </code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3><em>Less - 运算</em>
+          </h3>
+          <div class="row">
+            <div class="col-12">
+              <pre><code class="hljs" data-trim contenteditabl>
+/* less */
+// numbers are converted into the same units
+@conversion-1: 5cm + 10mm; // result is 6cm
+@conversion-2: 2 - 3cm - 5mm; // result is -1.5cm
+
+// conversion is impossible
+@incompatible-units: 2 + 5px - 3cm; // result is 4px
+
+// example with variables
+@base: 5%;
+@filler: @base * 2; // result is 10%
+@other: @base + @filler; // result is 15%
+          </code></pre>
+            </div>
+          </div>
+        </section>
+      </section>
+      <!--LESS END-->
+      <section>
+
+        <section>
+          <h2>ES6</h2>
+          <h3><em>const和let</em></h3>
+          <p> const 和 let，分别表示常量和变量。都是块级作用域(即花括号中)，只在它所申明的代码块内有效。</p>
+          <div class="row">
+            <div class="col-6">
+              <pre><code class="hljs" data-trim contenteditabl>
+//常量  
+const DELAY = 1000;
+
+DELAY = 1;
+
+// Uncaught SyntaxError: 
+// Identifier 'DELAY' has already been declared
+          </code></pre>
+            </div>
+            <div class="col-6">
+              <pre><code class="hljs" data-trim contenteditabl>
+//块级作用域
+{
+  let a = 1;
+  const b = 2;
+  var c = 3;
+}
+
+a // Uncaught ReferenceError: a is not defined
+b // Uncaught ReferenceError: b is not defined
+c // 3
+          </code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3><em>扩展符 ...</em></h3>
+          <div class="row">
+            <div class="col-6">
+              <p><small>组装Array</small>
+              </p>
+              <pre><code class="hljs" data-trim contenteditabl>
+const todos = ['Learn dva'];
+[...todos, 'Learn antd'];  
+//result: ['Learn dva', 'Learn antd']
+          </code></pre>
+            </div>
+            <div class="col-6">
+              <p><small>获取Array的部分值</small>
+              </p>
+              <pre><code class="hljs" data-trim contenteditabl>
+const arr = ['a', 'b', 'c'];
+const [first, ...rest] = arr;
+rest;  // ['b', 'c']
+          </code></pre>
+            </div>
+            <div class="col-6">
+              <p><small>收集function参数为数组</small>
+              </p>
+              <pre><code class="hljs" data-trim contenteditabl>
+function directions(first, ...rest) {
+  console.log(rest);
+}
+
+directions('a', 'b', 'c');  // ['b', 'c'];
+          </code></pre>
+            </div>
+            <div class="col-6">
+              <p><small>组合成新的 Object (ES2017 stage-2 proposal)</small>
+              </p>
+              <pre><code class="hljs" data-trim contenteditabl>
+const foo = {a: 1, b: 2, }; 
+const bar = {b: 3, c: 2, }; 
+const d = 4;
+
+const ret = { ...foo, ...bar, d };  
+// { a:1, b:3, c:2, d:4 }
+          </code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3><em>变量的解构赋值</em></h3>
+          <div class="row">
+            <div class="col-12">
+              <pre><code class="hljs" data-trim contenteditabl>
+//数组
+const [foo, bar] = [1, 2];
+const [x, y, ...z] = ['a'];
+x // "a"
+y // undefined，解构不成功，变量的值就等于undefined
+z // []
+
+let [x, y = 'b'] = ['a']; // x='a', y='b'
+let [x, y = 'b'] = ['a', undefined]; // x='a', y='b'
+          </code></pre>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <pre><code class="hljs" data-trim contenteditabl>
+// 对象
+const user = { name: 'guanguan', age: 2 };
+const { name, age } = user;
+console.log(`${name} : ${age}`);  // guanguan : 2
+
+          </code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3><em>对象字面量改进</em></h3>
+          <div class="row">
+            <div class="col-12">
+              <pre><code class="hljs" data-trim contenteditabl>
+//变量名当key,变量值当key值              
+const name = 'duoduo';
+const age = 8;
+
+const user = { name, age };  // { name: 'duoduo', age: 8 }
+          </code></pre>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <pre><code class="hljs" data-trim contenteditabl>
+// 省略function
+{
+  add() {}  // 等同于 add: function() {}
+}
+
+          </code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3><em>模板字符串</em></h3>
+          <p>使用`更优雅的组合字符串</p>
+          <div class="row">
+            <div class="col-12">
+              <pre><code class="hljs" data-trim contenteditabl>
+$('#result').append(`
+  There are <b>${basket.count}</b> items
+   in your basket, <em>${basket.onSale}</em>
+  are on sale!
+`);
+          </code></pre>
+            </div>
+          </div>
+          <p>等同于</p>
+          <div class="row">
+            <div class="col-12">
+              <pre><code class="hljs" data-trim contenteditabl>
+$('#result').append(
+  'There are <b>' + basket.count + '</b> ' +
+  'items in your basket, ' +
+  '<em>' + basket.onSale +
+  '</em> are on sale!'
+);
+          </code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3><em>默认参数</em></h3>
+          <div class="row">
+            <div class="col-12">
+              <pre><code class="hljs" data-trim contenteditabl>
+function logActivity(activity = 'skiing') {
+  console.log(activity);
+}
+
+logActivity();  // skiing
+          </code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3><em>箭头函数</em></h3>
+          <p>箭头左边是函数的入参，右边是执行结果</p>
+          <div class="row">
+            <div class="col-12">
+              <pre><code class="hljs" data-trim contenteditabl>
+//ES6              
+[1, 2, 3].map(x => x + 1);  // [2, 3, 4]
+          </code></pre>
+            </div>
+          </div>
+
+          <p>等同于 </p>
+          <div class="row">
+            <div class="col-12">
+              <pre><code class="hljs" data-trim contenteditabl>          
+[1, 2, 3].map((function(x) {
+  return x + 1;
+}).bind(this));
+          </code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3><em>Generator函数</em></h3>
+          <p>有两个特征。一是，function关键字与函数名之间有一个星号；二是，函数体内部使用yield表达式。是ES6提供的一种异步编程解决方案。</p>
+          <div class="row">
+            <div class="col-12">
+              <pre><code class="hljs" data-trim contenteditabl>
+function* helloWorldGenerator() {
+  yield 'hello';
+  yield 'world';
+  return 'ending';
+}
+var hw = helloWorldGenerator();
+
+hw.next(); // { value: 'hello', done: false }
+
+hw.next(); // { value: 'world', done: false }
+
+hw.next(); // { value: 'ending', done: true }
+
+hw.next(); // { value: undefined, done: true }
+          </code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3><em>Promises对象</em></h3>
+          <p><a href="https://juejin.im/post/5a113079f265da43310d68cd" target="_blank">类似</a>jQuery中的Deferred对象，用于更优雅地处理异步请求。</p>
+          <pre><code class="hljs" data-trim contenteditabl>
+const delay = (timeout) => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout);
+  });
+};
+
+delay(1000).then(_ => {
+  console.log('executed');
+});
+          </code></pre>
+
+        </section>
+        <section>
+          <h3><em>模块的 Import 和 Export</em></h3>
+          <div class="row">
+            <div class="col-12">
+              <pre><code class="hljs" data-trim contenteditable>
+// 引入全部
+import dva from 'dva';
+
+// 引入部分
+import { connect } from 'dva';
+import { Link, Route } from 'dva/router';
+
+// 引入全部并作为 github 对象
+import * as github from './services/github';
+
+// 导出默认
+export default App;
+// 部分导出，需 import { App } from './file'; 引入
+export class App extend Component {};
+          </code></pre>
+            </div>
+          </div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>react@16.5.2<iframe
+    style="margin-left: 2px; margin-bottom:-5px;"
+    frameborder="0" scrolling="0" width="91px" height="20px"
+    src="https://ghbtns.com/github-btn.html?user=facebook&repo=react&type=star&count=true" >
+</iframe></h2>
+          <div style="text-align:left">
+            <ul>
+              <li>JSX语法</li>
+              <li>组件：props，state，propTypes，生命周期</li>
+              <li>事件：合成事件和原生事件</li>
+              <li>开发工具：vscode，React Developer Tools和Redux DevTools</li>
+            </ul>
+          </div>
+
+          <p><a href="https://react.css88.com/docs/hello-world.html" target="_blank">中文文档</a> | <a href="http://taobaofed.org/blog/2016/11/17/react-components-communication/" target="_blank">数据传递</a> | <a href="https://segmentfault.com/a/1190000014968360" target="_blank">渲染控制</a> | <a href="http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/" target="_blank">生命周期</a> | <a href="http://www.developer-cheatsheets.com/react" target="_blank">cheatsheets</a>
+          </p>
+        </section>
+        <section>
+          <p><small></small>
+          </p>
+          <div class="row">
+            <div class="col-12">
+              <pre><code class="hljs" data-trim contenteditable>
+//函数组件              
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+          </code></pre>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <pre><code class="hljs" data-trim contenteditable>
+//类组件              
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+          </code></pre>
+            </div>
+          </div>
+        </section>
+      </section>
+      <section>
+        <h2>antd@3.10.1 <iframe
+    style="margin-left: 2px; margin-bottom:-5px;"
+    frameborder="0" scrolling="0" width="91px" height="20px"
+    src="https://ghbtns.com/github-btn.html?user=ant-design&repo=ant-design&type=star&count=true" >
+</iframe></h2>
+        <div style="text-align:left;">
+          <ul>
+            <li>蚂蚁金服出品的基于react的视图框架</li>
+            <li>兼容IE9+及其他现代浏览器</li>
+            <li>包含Button,Icon, Dropdown,Table,Popover等54种常用组件</li>
+            <li>蚂蚁金服，阿里巴巴，腾讯，百度，口碑，美团，滴滴和饿了么使用</li>
+          </ul>
+        </div>
+        <br>
+        <p><a href="https://ant.design/components/timeline-cn/" target="_blank">antd官网</a> | <a href="https://soonyh.coding.me/zeal-cube/components/timeline-cn/" target="_blank">Zeal Cube官网</a>
+        </p>
+      </section>
+      <section>
+        <section>
+          <h2>umi@2.1.2</h2>
+          <p>可以理解为针对react的构建工具。通过umi可以管控从源码到构建产物的每个生命周期</p>
+          <div style="text-align:left">
+            <ul>
+              <li>内置 react、react-router</li>
+              <li>提供ES6/ES7/LESS/CSS Module预编译的能力</li>
+              <li>提供以路由为单元的 code splitting和组件按需加载的能力</li>
+              <li>提供前端Mock能力 <a href="https://umijs.org/zh/guide/mock-data.html#%E5%A6%82%E4%BD%95%E6%A8%A1%E6%8B%9F%E5%BB%B6%E8%BF%9F" target="_blank">➚</a>
+              </li>
+              <li>提供压缩代码和图片、热插拔、hash文件的能力</li>
+            </ul>
+          </div>
+          <br>
+          <p class="text-center">约定目录↓</p>
+        </section>
+        <section>
+          <pre><code class="hljs" data-trim contenteditabl>
+.
+├── dist/                          // 默认的 build 输出目录
+├── mock/                          // mock 文件所在目录，基于 express
+├── config/
+    ├── config.js                  // umi 配置，同 .umirc.js，二选一
+└── src/                           // 源码目录，可选
+    ├── layouts/index.js           // 全局布局
+    ├── pages/                     // 页面目录，里面的文件即路由
+        ├── .umi/                  // dev 临时目录，需添加到 .gitignore
+        ├── .umi-production/       // build 临时目录，会自动删除
+        ├── document.ejs           // HTML 模板
+        ├── 404.js                 // 404 页面
+        ├── page1.js               // 页面 1，任意命名，导出 react 组件
+        ├── page1.test.js          // 用例文件，umi test 会匹配所有 .test.js 和 .e2e.js 结尾的文件
+        └── page2.js               // 页面 2，任意命名
+    ├── global.css                 // 约定的全局样式文件，自动引入，也可以用 global.less
+    ├── global.js                  // 可以在这里加入 polyfill
+├── .umirc.js                      // umi 配置，同 config/config.js，二选一
+├── .env                           // 环境变量
+└── package.json
+});
+          </code></pre>
+        </section>
+      </section>
+      <section>
+        <h2>二、实战 - <a href="http://10.45.47.10/soon/unicorm-custmer-center" target="_blank">联通政企客户中心</a></h2>
+      </section>
+      <section>
+        <p class="text-center" style="font-size:500%; color:#36e139;">✌</p>
+        <p class="text-center">分享完毕~</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="./lib/js/head.min.js"></script>
+  <script src="./js/reveal.js"></script>
+
+  <script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      history: true,
+      slideNumber: true,
+      transition: 'convex',
+      width: 1200,
+      // mouseWheel: true,
+      // autoSlide: 1000 ,
+      // More info https://github.com/hakimel/reveal.js#dependencies
+      dependencies: [{
+        src: './plugin/markdown/marked.js'
+      }, {
+        src: './plugin/markdown/markdown.js'
+      }, {
+        src: './plugin/notes/notes.js',
+        async: true
+      }, {
+        src: './plugin/highlight/highlight.js',
+        async: true,
+        callback: function() {
+          hljs.initHighlightingOnLoad();
+        }
+      }]
+    });
+  </script>
+</body>
+
+</html>
